@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minha Lista de Tarefas | Design & Dark Mode</title>
+  <!-- Link para a folha de estilos -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Container principal estilo celular / card moderno -->
+  <div class="app-wrapper">
+    <main class="app-container">
+      
+      <!-- Cabeçalho superior com Título e Botão de Tema (Dark Mode) -->
+      <header class="app-header">
+        <div class="header-top">
+          <div class="header-title-group">
+            <span class="header-icon">✨</span>
+            <div>
+              <h1>Minhas Tarefas</h1>
+              <p class="subtitle">Organize seu dia com clareza</p>
+            </div>
+          </div>
+          <!-- Botão para alternar entre Modo Claro e Modo Escuro -->
+          <button id="theme-toggle" class="theme-toggle-btn" aria-label="Alternar modo escuro" title="Alternar tema">
+            <span id="theme-icon">🌙</span>
+          </button>
+        </div>
+
+        <!-- Seletor de Categorias no topo (inspirado no layout) -->
+        <div class="category-pills" id="category-filters">
+          <button type="button" class="category-pill active" data-category="all">
+            <span class="pill-icon">📋</span>
+            <span class="pill-text">Todas</span>
+            <span class="pill-badge" id="badge-all">0</span>
+          </button>
+          <button type="button" class="category-pill" data-category="geral">
+            <span class="pill-icon">📝</span>
+            <span class="pill-text">Geral</span>
+            <span class="pill-badge" id="badge-geral">0</span>
+          </button>
+          <button type="button" class="category-pill" data-category="estudos">
+            <span class="pill-icon">📚</span>
+            <span class="pill-text">Estudos</span>
+            <span class="pill-badge" id="badge-estudos">0</span>
+          </button>
+          <button type="button" class="category-pill" data-category="trabalho">
+            <span class="pill-icon">💼</span>
+            <span class="pill-text">Trabalho</span>
+            <span class="pill-badge" id="badge-trabalho">0</span>
+          </button>
+          <button type="button" class="category-pill" data-category="pessoal">
+            <span class="pill-icon">🐾</span>
+            <span class="pill-text">Pessoal</span>
+            <span class="pill-badge" id="badge-pessoal">0</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Formulário para adicionar nova tarefa com categoria -->
+      <form id="task-form" class="task-form">
+        <div class="input-row">
+          <input 
+            type="text" 
+            id="task-input" 
+            placeholder="O que você precisa fazer?" 
+            autocomplete="off"
+            required 
+          />
+          <select id="task-category" class="category-select" title="Escolha uma categoria">
+            <option value="geral">📝 Geral</option>
+            <option value="estudos">📚 Estudos</option>
+            <option value="trabalho">💼 Trabalho</option>
+            <option value="pessoal">🐾 Pessoal</option>
+          </select>
+        </div>
+        <button type="submit" id="add-button" class="add-button">
+          <span>+ Adicionar Tarefa</span>
+        </button>
+      </form>
+
+      <!-- Barra de filtros de status (Todas / Pendentes / Concluídas) e contador -->
+      <section class="status-bar">
+        <div class="status-tabs">
+          <button type="button" class="status-tab active" data-filter="all">Todas</button>
+          <button type="button" class="status-tab" data-filter="pending">Pendentes</button>
+          <button type="button" class="status-tab" data-filter="completed">Concluídas</button>
+        </div>
+        <span id="task-counter" class="task-counter">0 pendentes</span>
+      </section>
+
+      <!-- Lista dinâmica de tarefas -->
+      <ul id="task-list" class="task-list"></ul>
+
+      <!-- Estado vazio quando não houver tarefas -->
+      <div id="empty-state" class="empty-state">
+        <div class="empty-illustration">☕</div>
+        <p class="empty-title">Tudo limpo por aqui!</p>
+        <p class="empty-desc">Nenhuma tarefa encontrada nesta visualização.</p>
+      </div>
+      
+    </main>
+  </div>
+
+  <!-- Script com lógica interativa e suporte a Dark Mode -->
+  <script src="script.js"></script>
+</body>
+</html>

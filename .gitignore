@@ -1,0 +1,6 @@
+# Arquivos de sistema do macOS
+.DS_Store
+
+# Arquivos de configuração de editores
+.vscode/
+.idea/

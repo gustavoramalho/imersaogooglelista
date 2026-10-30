@@ -1,0 +1,563 @@
+/* ====================================================================
+   1. VARIÁVEIS DE TEMA (LIGHT MODE & DARK MODE)
+   ====================================================================
+   Inspirado no visual acolhedor e limpo das imagens de referência:
+   - Cores suaves, cantos bem arredondados (estilo mobile card)
+   - Modo Claro (tons quentes de creme e café)
+   - Modo Escuro (tons de carvão profundo confortáveis para a vista)
+*/
+
+:root {
+  /* Tema Claro (Padrão) */
+  --bg-page: #fbf5eb;
+  --bg-card: #fffdf9;
+  --bg-item: #ffffff;
+  --bg-item-hover: #f9f4ec;
+  --border-color: #ebdccb;
+  --border-light: #f3e9db;
+  
+  --text-main: #2b231d;
+  --text-muted: #7d7268;
+  --text-dimmed: #a89c90;
+
+  --primary-color: #d97736;         /* Tom terracota / caramelo quente acolhedor */
+  --primary-hover: #c46424;
+  --primary-light: #fbeee3;
+
+  /* Cores de Tarefas Concluídas */
+  --success-bg: #eef9f2;
+  --success-border: #b8e6c8;
+  --success-accent: #10b981;
+  --success-text: #166534;
+
+  /* Categorias (Cores Pastéis) */
+  --cat-geral-bg: #f3f0ea;
+  --cat-estudos-bg: #e0f2fe;
+  --cat-estudos-text: #0369a1;
+  --cat-trabalho-bg: #fef3c7;
+  --cat-trabalho-text: #92400e;
+  --cat-pessoal-bg: #fce7f3;
+  --cat-pessoal-text: #9d174d;
+
+  --shadow-main: 0 16px 36px -10px rgba(78, 52, 28, 0.08), 0 6px 16px -6px rgba(78, 52, 28, 0.04);
+  --shadow-item: 0 3px 8px -2px rgba(78, 52, 28, 0.04);
+  --radius-app: 28px;
+  --radius-card: 16px;
+  --radius-pill: 9999px;
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ====================================================================
+   2. TEMA ESCURO (DARK MODE)
+   ==================================================================== */
+body.dark-mode {
+  --bg-page: #151618;
+  --bg-card: #212328;
+  --bg-item: #2a2d34;
+  --bg-item-hover: #32363f;
+  --border-color: #383c46;
+  --border-light: #2c2f38;
+
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --text-dimmed: #6b7280;
+
+  --primary-color: #ea8a4b;
+  --primary-hover: #f39b61;
+  --primary-light: #3d2c22;
+
+  --success-bg: #1c2b23;
+  --success-border: #264d36;
+  --success-accent: #34d399;
+  --success-text: #86efac;
+
+  /* Categorias no Modo Escuro */
+  --cat-geral-bg: #353842;
+  --cat-estudos-bg: #1e3a5f;
+  --cat-estudos-text: #7dd3fc;
+  --cat-trabalho-bg: #453118;
+  --cat-trabalho-text: #fcd34d;
+  --cat-pessoal-bg: #451b2e;
+  --cat-pessoal-text: #f472b6;
+
+  --shadow-main: 0 16px 40px -10px rgba(0, 0, 0, 0.5);
+  --shadow-item: 0 4px 10px -2px rgba(0, 0, 0, 0.3);
+}
+
+/* ====================================================================
+   3. RESET & ESTRUTURA GERAL
+   ==================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 16px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.app-wrapper {
+  width: 100%;
+  max-width: 520px;
+}
+
+.app-container {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-app);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-main);
+  padding: 28px 22px;
+  transition: var(--transition);
+}
+
+/* ====================================================================
+   4. CABEÇALHO & TOGGLE DO DARK MODE
+   ==================================================================== */
+.app-header {
+  margin-bottom: 22px;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header-title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-icon {
+  font-size: 1.8rem;
+  background-color: var(--primary-light);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.header-title-group h1 {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Botão de Alternar Modo Escuro */
+.theme-toggle-btn {
+  background-color: var(--bg-item);
+  border: 1px solid var(--border-color);
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  box-shadow: var(--shadow-item);
+  transition: var(--transition);
+}
+
+.theme-toggle-btn:hover {
+  transform: rotate(15deg) scale(1.05);
+  border-color: var(--primary-color);
+}
+
+/* ====================================================================
+   5. CARROSSEL DE CATEGORIAS (Inspirado no visual do App)
+   ==================================================================== */
+.category-pills {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scrollbar-width: none; /* Firefox */
+}
+
+.category-pills::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.category-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--bg-item);
+  border: 1px solid var(--border-color);
+  padding: 8px 12px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+.category-pill:hover {
+  color: var(--text-main);
+  border-color: var(--primary-color);
+}
+
+.category-pill.active {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 10px -2px rgba(217, 119, 54, 0.35);
+}
+
+.pill-icon {
+  font-size: 0.95rem;
+}
+
+.pill-badge {
+  background-color: rgba(0, 0, 0, 0.08);
+  font-size: 0.72rem;
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+.category-pill.active .pill-badge {
+  background-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+/* ====================================================================
+   6. FORMULÁRIO DE NOVA TAREFA
+   ==================================================================== */
+.task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 22px;
+  background-color: var(--bg-item);
+  padding: 12px;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-item);
+}
+
+.input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.task-form input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  padding: 8px 10px;
+  outline: none;
+}
+
+.task-form input::placeholder {
+  color: var(--text-dimmed);
+}
+
+.category-select {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  color: var(--text-main);
+  outline: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.add-button {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: var(--transition);
+}
+
+.add-button:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+/* ====================================================================
+   7. BARRA DE STATUS (Filtros Todas/Pendentes/Concluídas)
+   ==================================================================== */
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.status-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.status-tab {
+  background: transparent;
+  border: none;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.status-tab:hover {
+  color: var(--text-main);
+}
+
+.status-tab.active {
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+}
+
+.task-counter {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* ====================================================================
+   8. ITENS DA LISTA DE TAREFAS (Cards Arredondados)
+   ==================================================================== */
+.task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--bg-item);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-card);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-item);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.task-item:hover {
+  background-color: var(--bg-item-hover);
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-main);
+}
+
+.task-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+  cursor: pointer;
+}
+
+/* Checkbox Moderno com cantos arredondados */
+.task-checkbox {
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+  display: grid;
+  place-content: center;
+  transition: var(--transition);
+  flex-shrink: 0;
+  background-color: var(--bg-card);
+}
+
+.task-checkbox:hover {
+  border-color: var(--primary-color);
+}
+
+.task-checkbox:checked {
+  background-color: var(--success-accent);
+  border-color: var(--success-accent);
+}
+
+.task-checkbox:checked::before {
+  content: "✔";
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.task-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.task-text {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-main);
+  word-break: break-word;
+  transition: var(--transition);
+}
+
+.task-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Etiqueta da Categoria (Geral, Estudos, etc.) */
+.category-tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.category-tag.geral {
+  background-color: var(--cat-geral-bg);
+  color: var(--text-muted);
+}
+.category-tag.estudos {
+  background-color: var(--cat-estudos-bg);
+  color: var(--cat-estudos-text);
+}
+.category-tag.trabalho {
+  background-color: var(--cat-trabalho-bg);
+  color: var(--cat-trabalho-text);
+}
+.category-tag.pessoal {
+  background-color: var(--cat-pessoal-bg);
+  color: var(--cat-pessoal-text);
+}
+
+.task-time {
+  font-size: 0.72rem;
+  color: var(--text-dimmed);
+}
+
+/* --------------------------------------------------------------------
+   ESTILO DA TAREFA CONCLUÍDA
+   -------------------------------------------------------------------- */
+.task-item.completed {
+  background-color: var(--success-bg);
+  border-color: var(--success-border);
+  border-left: 5px solid var(--success-accent);
+  opacity: 0.88;
+}
+
+.task-item.completed .task-text {
+  text-decoration: line-through;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Ações laterais (badge e botão de excluir) */
+.task-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 10px;
+}
+
+.status-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.status-badge.completed {
+  background-color: var(--success-border);
+  color: var(--success-text);
+}
+
+.delete-btn {
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 8px;
+  opacity: 0.6;
+  transition: var(--transition);
+}
+
+.delete-btn:hover {
+  opacity: 1;
+  background-color: rgba(239, 68, 68, 0.15);
+  transform: scale(1.1);
+}
+
+/* ====================================================================
+   9. ESTADO VAZIO (QUANDO NÃO HÁ TAREFAS)
+   ==================================================================== */
+.empty-state {
+  text-align: center;
+  padding: 36px 16px;
+  display: none;
+}
+
+.empty-state.show {
+  display: block;
+}
+
+.empty-illustration {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+}
+
+.empty-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.empty-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
